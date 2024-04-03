@@ -36,7 +36,7 @@ pip install selenium BeautifulSoup4 prettytable
 
 ### Usage
 
-First run `./csranking_top_professors.py` to fetch the ranked universities and professors (according to your interest fields). The script outputs the information of professors, including his/her homepages and scholar pages.
+First, execute `./csranking_top_professors.py` to retrieve the ranked universities and professors based on your interest areas. This script provides details about the professors, including their homepages and Google Scholar pages.
 
 An example input:
 
@@ -44,7 +44,7 @@ An example input:
 python3 csranking_top_professors.py --fields sec,ai
 ```
 
-Then run `./relevant_professors.py` to fetch the relevance between your interested keywords and the professors' recent papers. We provide a functionality to filter by school. The script outputs the recent works and most cited works that matches user's interested keywords.
+Next, execute `./relevant_professors.py` to obtain the correlation between your selected keywords and the recent publications of these professors. This script allows filtering by institution and presents the latest and most cited works related to your keywords.
 
 An example input:
 
@@ -52,7 +52,7 @@ An example input:
 python3 relevant_professors.py --filename examples/2020-2024-sec-ai.csv --keywords "LLM,privacy"
 ```
 
-We provide example results inside `examples` folder.
+Example results can be found in the `examples` folder.
 
 ## License
 
