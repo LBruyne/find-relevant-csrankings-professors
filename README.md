@@ -4,7 +4,7 @@
 
 ## Description
 
-This project aims to help CS students seeking PhD professors, by uncovering the relevance between their background and the professors at various universities. Students can discover professors and universities by searching for relevant fields on [CSRankings](https://csranking.org). They can then filter for potential supervisors with related backgrounds by searching for interested keywords on academic websites (e.g., `Google Scholar`). The script provided here automates these steps.
+This project aims to help CS students seeking PhD professors, by uncovering the relevance between their background and the professors at various universities. Students can discover professors and universities by searching for relevant fields on [CSRankings](https://csrankings.org). They can then filter for potential supervisors with related backgrounds by searching for interested keywords on academic websites (e.g., `Google Scholar`). The script provided here automates these steps.
 
 The script offers the following functionalities:
 
