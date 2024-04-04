@@ -7,8 +7,9 @@ from utils import *
 from config import *
 
 
-def check_relevant_professors_in_scholar(items=[], keywords=[], max_count=10):
+def check_relevant_professors_in_scholar(items=[], keywords=[], max_count=DEFAULT_MAX_COUNT, max_search_count=DEFAULT_MAX_SEARCH_COUNT):
     relevant_professors = []
+    search_count = 0
     count = 0
     driver = webdriver.Chrome()
 
@@ -72,10 +73,13 @@ def check_relevant_professors_in_scholar(items=[], keywords=[], max_count=10):
             or relevant_professor["relevance"] > 0
         ):
             relevant_professors.append(relevant_professor)
+            count += 1
+            if count >= max_count:
+                return relevant_professors
 
         # Check maximum search count
-        count += 1
-        if count >= max_count:
+        search_count += 1
+        if search_count >= max_search_count:
             return relevant_professors
 
         # Adjust this time w.r.t. your network speed
@@ -86,7 +90,7 @@ def check_relevant_professors_in_scholar(items=[], keywords=[], max_count=10):
     return relevant_professors
 
 
-def parse_arguments(default_max_count):
+def parse_arguments():
     parser = argparse.ArgumentParser(
         description="Search for relevant professors based on keywords in paper titles."
     )
@@ -101,12 +105,18 @@ def parse_arguments(default_max_count):
         type=str,
         required=True,
         help="Comma-separated list of relevant keywords in paper titles (e.g., \"adversarial, blockchain, LLM\")",
-    )
+    )    
     parser.add_argument(
         "--max_count",
         type=int,
-        default=default_max_count,
-        help="Maximum number of professors to search for (default: 50)",
+        default=DEFAULT_MAX_COUNT,
+        help=f"Maximum number of professors to output (default: {DEFAULT_MAX_COUNT})",
+    )
+    parser.add_argument(
+        "--max_search_count",
+        type=int,
+        default=DEFAULT_MAX_SEARCH_COUNT,
+        help=f"Maximum number of professors to search for (default: {DEFAULT_MAX_SEARCH_COUNT})",
     )
     parser.add_argument(
         "--schools",
@@ -117,8 +127,10 @@ def parse_arguments(default_max_count):
 
     args = parser.parse_args()
 
-    if args.max_count > default_max_count:
-        args.max_count = default_max_count
+    if args.max_count > DEFAULT_MAX_COUNT:
+        args.max_count = DEFAULT_MAX_COUNT
+    if args.max_search_count > DEFAULT_MAX_SEARCH_COUNT:
+        args.max_search_count = DEFAULT_MAX_SEARCH_COUNT
 
     keywords = [keyword.strip().lower() for keyword in args.keywords.replace("\"", "").split(",")]
     school_filter = (
@@ -127,11 +139,11 @@ def parse_arguments(default_max_count):
         else None
     )
 
-    return args.filename, keywords, args.max_count, school_filter
+    return args.filename, keywords, args.max_count, args.max_search_count, school_filter
 
 
 if __name__ == "__main__":
-    filename, keywords, max_count, school_filter = parse_arguments(DEFAULT_MAX_COUNT)
+    filename, keywords, max_count, max_search_count, school_filter = parse_arguments()
 
     # Read file
     print("Loading universities...")
@@ -140,7 +152,7 @@ if __name__ == "__main__":
     print(f"Keywords: {keywords}")
     print("Start obtaining Google Scholar Info...")
     relevant_profs = check_relevant_professors_in_scholar(
-        datasource, keywords, max_count=max_count
+        datasource, keywords, max_count=max_count, max_search_count=max_search_count
     )
     print("Finish obtaining Google Scholar Info...")
 

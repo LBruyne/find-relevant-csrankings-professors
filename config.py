@@ -10,6 +10,11 @@ This time is used to avoid being blocked by the website.
 SLEEP_TIME = 1
 
 """
-Default maximum search count, i.e., the number of output professors relevant to you. The higher the number, the more time it takes to search.
+Default maximum output count, i.e., the number of output professors relevant to you. The higher the number, the more time it takes to search.
 """
-DEFAULT_MAX_COUNT = 20
+DEFAULT_MAX_COUNT = 50
+
+"""
+Default maximum search count.
+"""
+DEFAULT_MAX_SEARCH_COUNT = 500
