@@ -1,0 +1,6 @@
+*.csv
+
+*.zip
+chromedriver-*
+
+.DS_Store

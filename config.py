@@ -5,6 +5,11 @@ WARNING: if you set this time too low, the page may not load completely. And if 
 WAIT_TIME = 1
 
 """
-This time is used to wait for the page to load.
+This time is used to avoid being blocked by the website.
 """
 SLEEP_TIME = 1
+
+"""
+Default maximum search count, i.e., the number of output professors relevant to you. The higher the number, the more time it takes to search.
+"""
+DEFAULT_MAX_COUNT = 20

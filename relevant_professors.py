@@ -6,8 +6,6 @@ from selenium import webdriver
 from utils import *
 from config import *
 
-default_max_count = 50
-
 
 def check_relevant_professors_in_scholar(items=[], keywords=[], max_count=10):
     relevant_professors = []
@@ -133,7 +131,7 @@ def parse_arguments(default_max_count):
 
 
 if __name__ == "__main__":
-    filename, keywords, max_count, school_filter = parse_arguments(default_max_count)
+    filename, keywords, max_count, school_filter = parse_arguments(DEFAULT_MAX_COUNT)
 
     # Read file
     print("Loading universities...")
